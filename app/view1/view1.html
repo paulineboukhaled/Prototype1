@@ -1,0 +1,25 @@
+<section  class="container" ng-app="app" ng-controller="View1Ctrl">
+    <form name="newCandidatForm" class="well form-inline pull-left col-lg-5">
+        <legend>Ajouter un nouveau candidat</legend>
+        <fieldset class="row">
+            <label for="nom" class="col-lg-3">Nom :</label>
+            <input id="nom" type="text" style="width:150px" class="input-sm form-control " ng-model="newCandidat.name">
+        </fieldset>
+        <h1></h1>
+        <fieldset class="row">
+            <label for="prenom" class="col-lg-3">Prenom :</label>
+            <input id="prenom" type="text" style="width:150px" class="input-sm form-control" ng-model="newCandidat.familyname">
+        </fieldset>
+        <h1></h1>
+        <fieldset class="row">
+            <button class="btn btn-primary" type="submit" ng-click="addCandidat(newCandidat)"><span class="glyphicon glyphicon-ok-sign"></span> Ajouter </button>
+            <button class="btn btn-primary" type="reset"><span class="glyphicon glyphicon-remove-sign"></span> Annuler </button>
+        </fieldset>
+    </form>
+    <div class="well form-inline pull-right">
+    <h2>Liste des Candidats</h2>
+    <article ng-repeat="candidat in candidats">
+        <h3>{{candidat.nom}} {{candidat.prenom}} <button class="btn btn-primary" type="submit" ng-click="deleteCandidat(candidat)"><span class="glyphicon glyphicon-ok-sign"></span> Supprimer </button></h3>
+    </article>
+    </div>
+</section>
