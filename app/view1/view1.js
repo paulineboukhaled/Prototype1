@@ -10,7 +10,7 @@ angular.module('myApp.view1', ['ngRoute'])
 }])
 
 .controller('View1Ctrl', ['$scope', '$http', '$route', function ($scope, $http, $route) {
-        $scope.newCandidat = {nom: 'dupont', prenom: 'pierre', skill: 'java'};
+        $scope.newCandidat = {nom: 'dupont', prenom: 'pierre', skill: 'Java_(programming_language)'};
         $scope.tags= $('#my-tag-list').tags({
             tagData : ['Tag1', 'Tag2']
         } )
@@ -50,14 +50,15 @@ angular.module('myApp.view1', ['ngRoute'])
 
         $scope.getTags = function(labs) {
             var i=$scope.tags.getTags().length;
-            while($scope.tags.getTags().length!=0)
+            while(i>-1)
             {
-                $scope.tags.removeTag($scope.tags.getTags()[i]);
+                $scope.tags.removeTag($scope.tags.getTags()[i-1]);
                 i--;
             }
             var j=0;
             while($scope.tags.getTags().length!=labs.length)
             {
+                //alert(labs[j]);
                 $scope.tags.addTag(labs[j]);
                 j++;
             }
@@ -85,19 +86,23 @@ angular.module('myApp.view1', ['ngRoute'])
 
 
         $scope.getLabels = function(label) {
-            $http.get("http://localhost:8080/TM_JobQuest/api/?foo="+label)
-                .then(function successCallback(response) {
-                    $scope.responseLabels = response.data.skill;
+            $http.get("http://localhost:8080/TM_JobQuest/api/?skill="+label)
+                .success(function(response) {
+                    $scope.responseLabels = response;
                     $scope.getTags($scope.responseLabels);
-                    //$scope.candidats = response.data;
+                }
+            );
+
+
+                    /*/$scope.candidats = response.data;
                     // this callback will be called asynchronously
                     // when the response is available
                 }, function errorCallback(response) {
                     console.log(response);
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
-                });
-        }
+                });*/
+        };
 
         $scope.deleteCandidat = function (candidat) {
             $http.post("http://localhost:8080/TM_JobQuest/api/delete", candidat).then(function successCallback(response) {

@@ -3,21 +3,21 @@
         <legend>Ajouter un nouveau candidat</legend>
         <fieldset class="row">
             <label for="nom" class="col-lg-3">Nom :</label>
-            <input id="nom" type="text" style="width:150px" class="input-sm form-control " ng-model="newCandidat.nom">
+            <input id="nom" type="text"  class="input-sm form-control " ng-model="newCandidat.nom">
         </fieldset>
         <h1></h1>
         <fieldset class="row">
             <label for="prenom" class="col-lg-3">Prenom :</label>
-            <input id="prenom" type="text" style="width:150px" class="input-sm form-control" ng-model="newCandidat.prenom">
+            <input id="prenom" type="text" class="input-sm form-control" ng-model="newCandidat.prenom">
         </fieldset>
         <h1></h1>
         <fieldset class="row">
             <label for="skill" class="col-lg-3">Skill :</label>
-            <input id="skill" type="text" style="width:150px" class="input-sm form-control" ng-model="newCandidat.skill">
+            <input id="skill" type="text" class="input-sm form-control" ng-model="newCandidat.skill">
             <button class="btn btn-primary" type="submit" ng-click="getLabels(newCandidat.skill); reload();"><span class="glyphicon glyphicon-ok-sign"></span> Compute </button>
-            <!--div ng-repeat="responseLabel in responseLabels">
-                <!--a class="btn btn-default glyphicon glyphicon-hand-up">{{responseLabel}}</a-->
-
+            <div ng-repeat="responseLabel in responseLabels">
+                <a class="btn btn-default">{{responseLabel.name}}</a>
+            </div>
             <div id="my-tag-list" class="tag-list"></div>
 
         </fieldset>
