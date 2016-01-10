@@ -1,5 +1,26 @@
-<p>This is the partial for view 2.</p>
-<p>
-  Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
-</p>
+<div style="width: 400px;  padding: 20px; text-align: center;">
+  <form action="http://localhost:8080/TM_JobQuest/UploadPDF" method="post" enctype="multipart/form-data">
+    Select image to upload:
+    <input type="file" name="fileToUpload" id="fileToUpload">
+    <input type="submit" value="Upload Image" name="submit">
+  </form>
+  <input id="input-ficons-1" name="inputficons1[]" multiple type="file" class="file-loading">
+  <script>
+    $("#input-ficons-1").fileinput({
+      uploadUrl: "/file-upload-batch/2",
+      uploadAsync: true,
+      previewFileIcon: '<i class="fa fa-file"></i>',
+      allowedPreviewTypes: null, // set to empty, null or false to disable preview for all types
+      previewFileIconSettings: {
+        'docx': '<i class="fa fa-file-word-o text-primary"></i>',
+        'xlsx': '<i class="fa fa-file-excel-o text-success"></i>',
+        'pptx': '<i class="fa fa-file-powerpoint-o text-danger"></i>',
+        'jpg': '<i class="fa fa-file-photo-o text-warning"></i>',
+        'pdf': '<i class="fa fa-file-pdf-o text-danger"></i>',
+        'zip': '<i class="fa fa-file-archive-o text-muted"></i>',
+      }
+    });
+    </script>
+</div>
+
+

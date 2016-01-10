@@ -1,0 +1,16 @@
+<div style="width: 400px; border: 1px solid blue; padding: 20px; text-align: center;">
+  <div class="well form-inline pull-right">
+    <h2>Candidates available</h2>
+    <article ng-repeat="candidat in candidats">
+      <h3>{{candidat.nom}} {{candidat.prenom}} <button class="btn btn-primary" type="submit" ng-click="deleteCandidat(candidat); reload();"><span class="glyphicon glyphicon-ok-sign"></span> Supprimer </button></h3>
+    </article>
+  </div>
+  <div class="well form-inline pull-right">
+    <h2>Jobs available</h2>
+    <article ng-repeat="candidat in candidats">
+      <h3>{{candidat.nom}} {{candidat.prenom}} <button class="btn btn-primary" type="submit" ng-click="deleteCandidat(candidat); reload();"><span class="glyphicon glyphicon-ok-sign"></span> Supprimer </button></h3>
+    </article>
+  </div>
+</div>
+
+
