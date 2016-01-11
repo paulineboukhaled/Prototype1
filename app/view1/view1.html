@@ -1,72 +1,97 @@
 <section  class="container" ng-app="app" ng-controller="View1Ctrl">
-    <form style="height:450px;">
-    <div name="newCandidatForm" class="well form-inline pull-left col-lg-5" style="width:100%; height:440px;">
-        <!--fieldset  class="row">
-            Select PDF to upload:
-            <input type="file" name="fileToUpload" id="fileToUpload">
-            <input type="submit" value="Upload Image" name="submit">
-        </fieldset-->
-        <div>
-            <div class="check-element animate-show" ng-show="checked">
-                <legend>Add a new candidate</legend>
-                <fieldset class="row">
-                    <label for="nom" class="col-lg-3">Name :</label>
-                    <input id="nom" type="text"  class="input-sm form-control " ng-model="newCandidat.nom">
-                </fieldset>
-                <h1></h1>
-                <fieldset class="row">
-                    <label for="prenom" class="col-lg-3">FirstName :</label>
-                    <input id="prenom" type="text" class="input-sm form-control" ng-model="newCandidat.prenom">
-                </fieldset>
-                <h1></h1>
-                <fieldset class="row">
-                    <label for="skill" class="col-lg-3">Skill :</label>
-                    <div>
-                        <a href="#" editable-text="user.name">{{user.name || "empty" }}</a>
-                    </div>
-                    <input id="skill" type="text" class="input-sm form-control" ng-model="newCandidat.skill">
-                    <button class="btn btn-primary" type="submit" ng-click="getLabels(newCandidat.skill); reload();"><span class="glyphicon glyphicon-ok-sign"></span> Compute </button>
-                    <div class="input-group">
-                        <div ng-repeat="responseLabel in responseLabels">
-                            <button class="btn btn-default">{{responseLabel.name}}</button>
+    <img src="logoJQ.png"  class=" pull-left" width="15%"  style="margin: 3px " class="img-rounded"/>
+    <form action="http://localhost:8080/TM_JobQuest/UploadPDF" method="post" enctype="multipart/form-data">
+        <div name="newCandidatForm" class="well form-inline pull-right col-lg-10">
+            <div>
+                <div class="check-element animate-show" ng-show="checked">
+                    <legend>Add Contact Details</legend>
+                    <fieldset class="row">
+                        <label for="nom" class="col-lg-3">Name :</label>
+                        <input id="nom" type="text"  class="input-sm form-control " ng-model="newCandidat.nom">
+                    </fieldset>
+                    <h1></h1>
+                    <fieldset class="row">
+                        <label for="prenom" class="col-lg-3">FirstName :</label>
+                        <input id="prenom" type="text" class="input-sm form-control" ng-model="newCandidat.prenom">
+                    </fieldset>
+                    <h1></h1>
+                    <fieldset class="row">
+                        <label for="dateofbirth"  class="col-lg-3">Date of Birth :</label>
+                        <input id="dateofbirth" type="date" ng-model="dateString" />
+                    </fieldset>
+                    <h1></h1>
+                    <fieldset class="row">
+                        <label for="address" class="col-lg-3">Address :</label>
+                        <input id="address" type="text" class="input-sm form-control" ng-model="newCandidat.address">
+                    </fieldset>
+                    <h1></h1>
+                    <fieldset class="row">
+                        <label for="npa" class="col-lg-1">NPA :</label>
+                        <input id="npa" type="text" class="input-sm form-control" ng-model="newCandidat.npa">
+                        <label for="city" class="col-lg-3">City :</label>
+                        <input id="city" type="text" class="input-sm form-control" ng-model="newCandidat.city">
+                    </fieldset>
+                    <h1></h1>
+                </div>
+                <div class="check-element animate-show" ng-hide="checked"  >
+                    <legend>Skills</legend>
+                    <fieldset class="row">
+                        <label class="col-lg-3">Skill :</label>
+                        <div class="control-group" id="fields">
+                            <div class="controls" id="profs">
+                                <div id="field"><input autocomplete="on" class=" input-sm form-control" id="field1" name="prof1" type="text" ng-model="newCandidat.skill" placeholder="Type something" data-items="20"/>
+                                    <button id="b1" class="btn add-more" type="button">+</button>
+                                </div>
+                                </br>
+                            </div>
                         </div>
-                    </div>
-                    <!--div id="my-tag-list" class="tag-list"></div-->
-                </fieldset>
-            </div>
-            <div class="check-element animate-show" ng-hide="checked"  >
-            <form action="http://localhost:8080/TM_JobQuest/UploadPDF" method="post" enctype="multipart/form-data">
-                    <legend>Add your files</legend>
-                    <fieldset  class="row"   >
-                        <input id="input-ficons-1" name="inputficons1[]" style="height:50px;" multiple type="file" class="file-loading">
+                        <!--input id="skill" type="text" class="input-sm form-control" ng-model="newCandidat.skill"-->
+                    </fieldset>
+                    <fieldset class="row">
+                        <label class="col-lg-3">Add attached files :</label>
+                        <input id="input-1" type="file" class="file" multiple="multiple">
                         <script>
-                            $("#input-ficons-1").fileinput({
-                                uploadUrl: "http://localhost:8080/TM_JobQuest/UploadPDF",
-                                uploadAsync: true,
-                                previewFileIcon: '<i class="fa fa-file"></i>',
-                                allowedPreviewTypes: null, // set to empty, null or false to disable preview for all types
-                                previewFileIconSettings: {
-                                    'docx': '<i class="fa fa-file-word-o text-primary"></i>',
-                                    'xlsx': '<i class="fa fa-file-excel-o text-success"></i>',
-                                    'pptx': '<i class="fa fa-file-powerpoint-o text-danger"></i>',
-                                    'jpg': '<i class="fa fa-file-photo-o text-warning"></i>',
-                                    'pdf': '<i class="fa fa-file-pdf-o text-danger"></i>',
-                                    'zip': '<i class="fa fa-file-archive-o text-muted"></i>',
-                                }
+                            $(document).ready(function(){
+                                var next = 1;
+                                $(".add-more").click(function(e){
+                                    e.preventDefault();
+                                    var addto = "#field" + next;
+                                    var addRemove = "#field" + (next);
+                                    next = next + 1;
+                                    var newIn = '<input autocomplete="on" style="display: inline-block" class="input-sm form-control" id="field' + next + '" name="field' + next + '" type="text">';
+                                    var newInput = $(newIn);
+                                    var removeBtn = '<button id="remove' + (next - 1) + '" class="btn btn-danger remove-me" >-</button></div><div id="field">';
+                                    var removeButton = $(removeBtn);
+                                    $(addto).after(newInput);
+                                    $(addRemove).after(removeButton);
+                                    $("#field" + next).attr('data-source',$(addto).attr('data-source'));
+                                    $("#count").val(next);
+
+                                    $('.remove-me').click(function(e){
+                                        e.preventDefault();
+                                        var fieldNum = this.id.charAt(this.id.length-1);
+                                        var fieldID = "#field" + fieldNum;
+                                        $(this).remove();
+                                        $(fieldID).remove();
+                                    });
+                                });
                             });
                         </script>
                     </fieldset>
-                </form>
+                </div>
+            </div>
+            <h1></h1>
+            <input type="button" class="btn btn-primary pull-right" ng-click="nextStep();" value="Next Step" aria-label="Toggle ngHide"><br/>
+            <h1></h1>
+            <hr>
+            <div class="row center-block ">
+                <button class="btn btn-primary" type="submit"  ng-click="addCandidat(newCandidat); reload();">
+                    <span class="glyphicon glyphicon-ok-sign"></span> Save the informations
+                </button>
+                <button class="btn btn-primary" type="reset">
+                    <span class="glyphicon glyphicon-remove-sign"></span > Cancel
+                </button>
             </div>
         </div>
-        <h1></h1>
-        <input type="submit" class="btn btn-primary pull-right" ng-click="nextStep();" value="Next Step" aria-label="Toggle ngHide"><br/>
-    </div>
     </form>
-    <h1></h1>
-    <div class="row center-block ">
-        <button class="btn btn-primary" type="submit"  ng-click="addCandidat(newCandidat); reload();"><span class="glyphicon glyphicon-ok-sign"></span> Save the informations</button>
-        <button class="btn btn-primary" type="reset"><span class="glyphicon glyphicon-remove-sign"></span > Cancel</button>
-    </div>
-
 </section>

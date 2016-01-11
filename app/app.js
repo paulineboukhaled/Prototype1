@@ -6,8 +6,7 @@ var myApp = angular.module('myApp', [
   'myApp.view1',
   'myApp.view2',
   'myApp.view3',
-  'myApp.version',
-  'xeditable'
+  'myApp.version'
 ]).
 
 config(['$routeProvider', function($routeProvider) {
@@ -17,7 +16,3 @@ config(['$routeProvider', function($routeProvider) {
 myApp.controller('helloCtrl', ['$scope', function ($scope) {
 
 }]);
-
-myApp.run(function(editableOptions) {
-  editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
-});
