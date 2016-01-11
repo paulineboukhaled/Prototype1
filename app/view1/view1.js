@@ -12,38 +12,12 @@ angular.module('myApp.view1', ['ngRoute'])
 }])
 
 .controller('View1Ctrl', ['$scope', '$http', '$route', function ($scope, $http, $route) {
-        $scope.newCandidat = {nom: 'dupont', prenom: 'pierre', skill: 'Java_(programming_language)'};
+        $scope.newCandidat = {nom: 'Dupont', prenom: 'Pierre', skill: 'Java_(programming_language)', city: 'Fribourg', npa:'1700', dateofbirth:'2014-02-20', address:'21 avenue du moleson'};
         $scope.checked = true;
-        /*$scope.tags= $('#my-tag-list').tags({
-            tagData : ['Tag1', 'Tag2']
-        } )*/
 
         $scope.nextStep =  function() {
             $scope.checked = !$scope.checked;
         }
-
-        $scope.user = {
-            name: 'awesome user'
-        };
-
-
-
-        $scope.getTags = function(labs) {
-            var i=$scope.tags.getTags().length;
-            while(i>-1)
-            {
-                $scope.tags.removeTag($scope.tags.getTags()[i-1]);
-                i--;
-            }
-            var j=0;
-            while($scope.tags.getTags().length!=labs.length)
-            {
-                //alert(labs[j]);
-                $scope.tags.addTag(labs[j]);
-                j++;
-            }
-        }
-
 
 
 
