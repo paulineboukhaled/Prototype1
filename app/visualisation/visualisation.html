@@ -1,0 +1,155 @@
+<div class="container">
+  <div class="row" ng-init="init()">
+  <div class="col-md-4">
+    <div style="position: fixed; width:350px">
+      <img src="logoJQ.png" width="50%" style="margin: 10px " class="img-rounded"/>
+
+
+
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Applicants</h3>
+        </div>
+        <div class="row" ng-repeat="key in keys(candidats) | orderBy: '-position'" style="margin: 3px">
+          <div class="col-md-2">
+            <input type="checkbox" ng-change="draw()" ng-model="candidats[key].isSelected">
+          </div>
+          <div class="col-md-7">
+            {{candidats[key].firstname}} {{candidats[key].lastname}}
+          </div>
+          <div class="col-md-3">
+                          <span style="font-size:15px;" class="glyphicon glyphicon-chevron-up" ng-click="upCandidat(key)"
+                                aria-hidden="true"></span>
+                          <span style="font-size:15px;" class="glyphicon glyphicon-chevron-down"
+                                ng-click="downCandidat(key)" aria-hidden="true"></span>
+                          <span style="font-size:15px;" class="glyphicon glyphicon-remove-circle"
+                                ng-click="removeCandidat(key); draw();" aria-hidden="true"></span>
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Jobs</h3>
+        </div>
+        <div class="row" ng-repeat="(key, job) in jobs" style="margin: 3px">
+          <div class="col-md-10">
+            {{job.name}}
+          </div>
+          <div class="col-md-2">
+            <input type="checkbox" ng-change="draw()" ng-model="job.isSelected">
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+  <div class="col-md-8">
+
+
+    <div  ng-show="getSelectedCandidats().length==0 || getSelectedJobs().length==0">
+      <div class="alert alert-success" role="alert">
+        Please select at least one applicant and one job to start using JobQuest.
+      </div>
+    </div>
+
+    <div ng-show="getSelectedCandidats().length>0 && getSelectedJobs().length>0">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Skills</h3>
+        </div>
+        <div class="panel-body">
+          <b ng-repeat="(key, candidat) in candidats" ng-if="candidat.isSelected">
+            <button ng-class="candidat==currentCand ? 'btn btn-sm btn-disabled' : 'btn btn-sm btn-primary'" ng-click="drawMultiCompOneCand(candidat); drawMultiCompOneCandLevel(candidat);" style="margin: 5px">{{candidat.firstname}} {{candidat.lastname}}</button>
+          </b>
+
+          <div class="row" style="margin: 3px ">
+            <div class="col-md-8">
+            </div>
+            <div class="col-md-4">
+              <select ng-change="drawMultiCompOneCand(candidat); drawMultiCompOneCandLevel(candidat)"
+                      ng-model="listEchelleSelectedMultiCompOneCand"
+                      class="form-control input-md">
+                <option ng-repeat="i in echelle">{{i}}</option>
+              </select>
+            </div>
+          </div>
+          <div ng-show="listEchelleSelectedMultiCompOneCand==echelle[0]" align="center"
+               id="containerMultiCompOneCand" style="height: 400px; margin: 0 auto">
+          </div>
+          <div ng-hide="listEchelleSelectedMultiCompOneCand==echelle[0]" align="center"
+               id="containerMultiCompOneCandLevel" style="height: 400px; margin: 0 auto">
+          </div>
+        </div>
+        <div align="right" style="margin: 6px">
+          <div ng-hide="showItem">
+                          <span ng-click="showItem=!showItem; prepareData();" style="font-size:28px; color: #5cb85c"
+                                data-original-title="Tooltip on right"
+                                class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+          </div>
+          <div ng-show="showItem">
+                          <span ng-click="showItem=!showItem; " style="font-size:28px; color:#b92c28"
+                                class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+      <div ng-show="showItem==true">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Specific Skill</h3>
+          </div>
+          <div class="panel-body">
+            {{echelle.level}}
+            <div align="right">
+              <div style="width: 400px">
+                <div class="row" style="margin: 3px ">
+                  <div class="col-md-1">
+                  </div>
+                  <div class="col-md-6">
+                    <select ng-change="drawOneCompMultiCand(); drawOneCompMultiCandLevel();"
+                            ng-model="listEchelleSelected"
+                            class="form-control input-md">
+                      <option ng-repeat="i in echelle">{{i}}</option>
+                    </select>
+                  </div>
+                  <div class="col-md-5">
+                    <select ng-change="drawOneCompMultiCand(); drawOneCompMultiCandPieChart(); drawOneCompMultiCandLevel();"
+                            ng-model="listCompSelected" class="form-control input-md">
+                      <option ng-repeat="i in listComp">{{i}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div ng-show="listEchelleSelected==echelle[0]" align="center" id="containerOneCompMultiCand"
+                 style="height: 400px; margin: 0 auto">
+            </div>
+            <div ng-hide="listEchelleSelected==echelle[0]" align="center" id="containerOneCompMultiCandLevel"
+                 style="height: 400px; margin: 0 auto">
+            </div>
+            <div id="containerOneCompMultiCandPieChart" style=" height: 400px; margin: 0 auto"></div>
+          </div>
+        </div>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">All Skills</h3>
+          </div>
+          <div class="panel-body">
+            <div id="containerRadar" style=" max-width: 600px; height: 400px; margin: 0 auto"></div>
+            <div id="containerMultiCompMultiCand" style="height: 400px; margin: 0 auto"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+
+
+

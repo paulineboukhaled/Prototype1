@@ -6,7 +6,10 @@ var myApp = angular.module('myApp', [
   'myApp.view1',
   'myApp.view2',
   'myApp.view3',
-  'myApp.version'
+  'myApp.visualisation',
+  'myApp.version',
+  'lr.upload',
+  'angucomplete'
 ]).
 
 config(['$routeProvider', function($routeProvider) {
@@ -16,3 +19,5 @@ config(['$routeProvider', function($routeProvider) {
 myApp.controller('helloCtrl', ['$scope', function ($scope) {
 
 }]);
+
+

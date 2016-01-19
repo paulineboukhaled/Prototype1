@@ -1,10 +1,205 @@
-<div style="width: 400px;  padding: 20px; text-align: center;">
-  <form action="http://localhost:8080/TM_JobQuest/UploadPDF" method="post" enctype="multipart/form-data" >
-    Select image to upload:
-    <input type="text" name="username" >
-    <input type="file" name="fileToUpload" id="fileToUpload" multiple="multiple">
-    <input type="submit" value="Upload Image" name="submit">
-  </form>
+<div class="container">
+  <img src="logoJQ.png"  class="col-md-2" />
+  <div class="col-md-10">
+    <section>
+      <div class="wizard">
+        <div class="wizard-inner">
+          <div class="connecting-line"></div>
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+              <a  ng-class="{'active':tabSelected=='#step1'}" ng-click="tabChange('#step1');" data-toggle="tab"  role="tab" title="Step 1">
+                  <span class="round-tab">
+                      <i class="fa fa-file-text-o fa-1x"></i>
+                  </span>
+              </a>
+            </li>
+            <li role="presentation" style="margin-left: 110px;" >
+              <a  ng-class="{'active':tabSelected=='#step2'}" ng-click="tabChange('#step2');" data-toggle="tab" role="tab" title="Step 2">
+                  <span class="round-tab">
+                      <i class="fa fa-graduation-cap fa-1x"></i>
+                  </span>
+              </a>
+            </li>
+            <li role="presentation" style="float: right;">
+              <a  ng-class="{'active':tabSelected=='#step3'}" ng-click="tabChange('#step3');" data-toggle="tab"  role="tab" title="Step 3">
+                  <span class="round-tab">
+                      <i class="fa fa-cog fa-1x"></i>
+                  </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="check-element animate-show"  id="step1"  ng-show="tabSelected=='#step1'">
+          <div class="panel-default">
+            <div class="panel-heading">
+              <h2 class="panel-title">Add Position Details</h2>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label for="position"  class="form-label">Position</label>
+                  <input name="position"  type="text" class="input-md form-control " ng-model="newPosition.position">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="employer"  class="form-label">Employer</label>
+                  <input name="employer"  type="text" class="input-md form-control" ng-model="newPosition.employer">
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label for="start"  class="form-label">Start</label>
+                  <input name="start"  type="text" class="input-md form-control" ng-model="newPosition.start">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="end"  class="form-label">End</label>
+                  <input name="end"  type="text" class="input-md form-control" ng-model="newPosition.end">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="description"  class="form-label">Description</label>
+                <input name="description"  type="text" class="input-md form-control" ng-model="newPosition.description">
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label for="npaJob"  class="form-label">NPA</label>
+                  <input name="npaJob"  type="text" class="input-md form-control" ng-model="newPosition.npa">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="cityJob"  class="form-label">City</label>
+                  <input name="cityJob"  type="text" class="input-md form-control" ng-model="newPosition.city">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="check-element animate-show"  id="step2" ng-show="tabSelected=='#step2'">
+          <div class="panel panel-group">
+            <form ng-repeat="school in newPosition.schools">
+              <div class="panel-default">
+                <div class="panel-heading">
+                  <h2 class="panel-title">Formation {{$index + 1}} required</h2>
+                </div>
+                <div class="panel-body">
+                  <div class="row">
+                    <div class="form-group col-md-4">
+                      <label for="title"  class="form-label">Title</label>
+                      <input name="title"  type="text" class="input-md form-control " ng-model="school.title">
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="school"  class="form-label">School</label>
+                      <input name="school"  type="text" class="input-md form-control" ng-model="school.school">
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="speciality"  class="form-label">Speciality</label>
+                      <input name="speciality"  type="text" class="input-md form-control" ng-model="school.speciality">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-md-6">
+                      <label for="npaSchool"  class="form-label">NPA</label>
+                      <input name="npaSchool"  type="text" class="input-md form-control" ng-model="school.npa">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="citySchool"  class="form-label">City</label>
+                      <input name="citySchool"  type="text" class="input-md form-control" ng-model="school.city">
+                    </div>
+                  </div>
+                  <button class="btn btn-warning form-control" type="button" ng-click="deleteSchool($index)">
+                    <span class="glyphicon glyphicon-minus"></span>
+                  </button>
+                </div>
+              </div>
+            </form>
+            <div class="panel-default">
+              <div class="panel-heading">
+                <h2 class="panel-title">Add a new formation</h2>
+              </div>
+              <div class="panel-body">
+                <div class="row">
+                  <div class="form-group col-md-4">
+                    <label for="title"  class="form-label">Title</label>
+                    <input name="title"  type="text" class="input-md form-control " ng-model="newSchool.title">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="school"  class="form-label">School</label>
+                    <input name="school"  type="text" class="input-md form-control" ng-model="newSchool.school">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="speciality"  class="form-label">Speciality</label>
+                    <input name="speciality"  type="text" class="input-md form-control" ng-model="newSchool.speciality">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label for="npaSchool"  class="form-label">NPA</label>
+                    <input name="npaSchool"  type="text" class="input-md form-control" ng-model="newSchool.npa">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="citySchool"  class="form-label">City</label>
+                    <input name="citySchool"  type="text" class="input-md form-control" ng-model="newSchool.city">
+                  </div>
+                </div>
+                <button class="btn btn-success form-control" type="button" ng-click="addSchool(newSchool)">
+                  <span class="glyphicon glyphicon-plus"></span>
+                </button>
+              </div>
+            </div>
+            <ul class="list-inline pull-right">
+              <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+              <li><button type="button" class="btn btn-default next-step">Skip</button></li>
+              <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
+            </ul>
+          </div>
+        </div>
+        <div class="check-element animate-show"  id="step3" ng-show="tabSelected=='#step3'">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h2 class="panel-title">Skills Required</h2>
+            </div>
+            <div class="panel-body">
+              <h3>Add a new skill:</h3>
+              <div class="form-inline">
+                <angucomplete  id="ex1" placeholder="" pause="100" selectedobject="selectedSkillDBPedia" localdata="skillDBPedia" searchfields="name" titlefield="name" minlength="1" inputclass="form-control1 form-control-small" matchclass="highlight" />
+                <form  class="has-error" ng-hide="selectedSkillDBPedia">
+                                        <span class="bold-span help-block ">Choose an available skill {{newSkill.name=selectedSkillDBPedia.originalObject.uri}}
+</span> <span class="bold-span">{{selectedSkillDBPedia.originalObject.uri}}</span>
+                </form>
+                <label class="form-label">Your level: </label>
+                <select class="form-control" ng-model="newSkill.level" ><option value="{{option.id}}" ng-repeat="option in levelTypes">{{option.name}}</option></select>
+                <label class="form-label">Your years of experience: </label>
+                <select class="form-control" ng-model="newSkill.yearOfExperience " ><option value="{{option.id}}" ng-repeat="option in yearOfExperienceTypes">{{option.name}}</option></select>
+                <button class="btn btn-primary" ng-disabled="!selectedSkillDBPedia" type="button" ng-click="addSkill(newSkill);">
+                  <span class="glyphicon glyphicon-plus"></span>
+                </button>
+              </div>
+              <hr>
+              <h3 class="col-md-12">List of skills required:</h3>
+              <form class="form-inline" ng-repeat="skill in newPosition.skills">
+                <input name="skillName"  type="text" class="input-md form-control" ng-model="skill.name">
+                <select class="form-control" ng-model="skill.level" ><option value="{{option.id}}" ng-repeat="option in levelTypes">{{option.name}}</option></select>
+                <select class="form-control" ng-model="skill.yearOfExperience" ><option value="{{option.id}}" ng-repeat="option in yearOfExperienceTypes">{{option.name}}</option></select>
+                <button class="btn btn-warning" type="button" ng-click="deleteSkill($index)">
+                  <span class="glyphicon glyphicon-minus"></span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </section>
+  </div>
+</div>
+<div class="container">
+  <div class="row center-block ">
+    <button class="btn btn-primary" ng-click="sendInformation(newCandidat)" >
+      <span class="glyphicon glyphicon-ok-sign"></span> Save the informations
+    </button>
+    <button class="btn btn-primary" type="reset">
+      <span class="glyphicon glyphicon-remove-sign"></span > Cancel
+    </button>
+  </div>
 </div>
 
 
