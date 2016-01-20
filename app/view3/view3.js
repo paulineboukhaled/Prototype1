@@ -9,9 +9,29 @@ angular.module('myApp.view3', ['ngRoute'])
   });
 }])
 
-.controller('View3Ctrl', [function() {
+.controller('View3Ctrl', ['$scope', '$http', '$route', function ($scope, $http, $route) {
 
-      getListCandidat();
+        $scope.candidats = [];
+        $scope.positions = [];
+        $scope.loading = true;
+
+
+
+        $http.get('http://localhost:8080/TM_JobQuest/api/position/globallist').
+            success(function (data) {
+                $scope.positions = data;
+            });
+
+
+
+        $http.get('http://localhost:8080/TM_JobQuest/api/user/globallist').
+            success(function (data) {
+                $scope.candidats = data;
+                $scope.loading =false;
+            });
+
+
+      /*getListCandidat();
       function getListCandidat() {
         $http.get("http://localhost:8080/TM_JobQuest/api/listPerson")
             .then(function successCallback(response) {
@@ -53,7 +73,7 @@ angular.module('myApp.view3', ['ngRoute'])
           // called asynchronously if an error occurs
           // or server returns response with an error status.
         });
-      }
+      }*/
 
 
 

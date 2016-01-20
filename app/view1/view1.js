@@ -50,7 +50,7 @@ angular.module('myApp.view1', ['ngRoute'])
             }
             ],
             "jobs": [{
-                "indexposition": "Programmer junior",
+                "position": "Programmer junior",
                 "employer": "Mr. X",
                 "start": "000",
                 "end": "001",
@@ -58,7 +58,7 @@ angular.module('myApp.view1', ['ngRoute'])
                 "npa": "1700",
                 "city": "Fribourg"
             }, {
-                "indexposition": "Programmer",
+                "position": "Programmer",
                 "employer": "Mr. X",
                 "start": "000",
                 "end": "001",

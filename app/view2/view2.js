@@ -25,7 +25,7 @@ angular.module('myApp.view2', ['ngRoute'])
 
 
       $scope.newPosition = {
-        "indexposition": "Programmer Junior Java/PHP",
+        "position": "Programmer Junior Java/PHP",
         "employer": "Pierre Kuonen",
         "start": "001",
         "end": "002",
