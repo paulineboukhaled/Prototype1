@@ -1,50 +1,105 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-6">
-    <div class="panel panel-default ">
-      <div class="panel-heading">
-        <h2 class="panel-title">Candidats</h2>
-      </div>
-      <div ng-show="loading">
+    <div class="col-md-6" >
+      <legend>Candidates</legend>
+      <div class="pre-scrollable" >
+        <div  class="panel panel-default" ng-repeat="candidat in candidats" >
+          <div class="panel-heading">
+            <h2 class="panel-title"  ng-hide="loading" ><input type="checkbox"  ng-model="candidat.isSelected" >
+              <a data-toggle="collapse" data-parent="#accordion" ng-click="showCandidatInfoChange($index)">
+                {{candidat.name}} {{candidat.firstname}}</a>
+            </h2>
+          </div>
+          <div  class="panel-body" ng-show="candidat.show">
+            <fieldset>
+              <label class="col-md-3">Name: </label><div class="col-md-3"> {{candidat.name}} {{candidat.firstname}}</div><label class="col-md-3">Birthdate: </label><div class="col-md-3"> {{candidat.birthdate}}</div>
+            </fieldset>
+            <hr>
+            <fieldset>
+              <label class="col-md-3">Address: </label><div class="col-md-9"> {{candidat.address}}, {{candidat.npa}} {{candidat.city}}</div>
+            </fieldset>
+            <hr>
+            <fieldset>
+              <label class="col-md-3">Skills: </label>
+              <div class="col-md-9">
+                <div ng-repeat="skill in candidat.skills">
+                  <div >{{skill.name}} </div>
+                </div>
+              </div>
+            </fieldset>
+            <hr>
+            <fieldset>
+              <label class="col-md-3">Titles: </label>
+              <div class="col-md-9">
+                <div ng-repeat="school in candidat.schools">
+                  <div >{{school.title}} </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="row panel-footer clearfix" ng-show="candidat.show">
+            <button class="btn btn-success pull-left" style="margin-left: 3px;" ng-click="getBestPositions(candidat.uri)"><i class="fa fa-briefcase"></i></button>
+            <button class="btn btn-danger btn-circle pull-right" style="margin: 3px;"> <i class="fa fa-trash-o"></i></button>
+            <button class="btn btn-warning btn-circle pull-right"  style="margin: 3px;"><i class="fa fa-pencil-square-o"></i></button>
+          </div>
+        </div>
+        <div ng-show="loading">
           <label ><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</label>
-      </div>
-      <div class="panel-body" ng-repeat="candidat in candidats" ng-hide="loading">
-        <div class="form-group" >
-          <input type="checkbox"  ng-model="candidat.isSelected" > {{candidat.name}} {{candidat.firstname}}
-          <hr>
         </div>
       </div>
     </div>
-    </div>
+
+
     <div class="col-md-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h2 class="panel-title">Jobs</h2>
+      <legend>Jobs</legend>
+      <div class="pre-scrollable">
+        <div class="panel panel-default" ng-repeat="position in positions" >
+          <div class="panel-heading">
+            <h2 class="panel-title"  ng-hide="loading" >
+              <input type="checkbox"  ng-model="position.isSelected" >
+              <a data-toggle="collapse" data-parent="#accordion" ng-click="showPositionInfoChange($index)">
+                {{position.position}} {{position.employer}}</a>
+            </h2>
+          </div>
+          <div  class="panel-body" ng-show="position.show">
+            <fieldset>
+              <label class="col-md-3">Job: </label><div class="col-md-3"> {{position.position}} </div><label class="col-md-3">Employer: </label><div class="col-md-3"> {{position.employer}}</div>
+            </fieldset>
+            <hr>
+            <fieldset>
+              <label class="col-md-1">Start: </label><div class="col-md-1">{{position.start}}</div><label class="col-md-1">End: </label><div class="col-md-1">{{position.end}}</div><label class="col-md-4">Location: </label><div class="col-md-4">{{position.npa}} {{position.city}}</div>
+            </fieldset>
+            <hr>
+            <fieldset>
+              <label class="col-md-3">Skills: </label>
+              <div class="col-md-9">
+                <div ng-repeat="skill in position.skills">
+                  <div >{{skill.name}} </div>
+                </div>
+              </div>
+            </fieldset>
+            <hr>
+            <fieldset>
+              <label class="col-md-3">Titles: </label>
+              <div class="col-md-9">
+                <div ng-repeat="school in position.schools">
+                  <div >{{school.title}} </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
       </div>
       <div ng-show="loading">
         <label ><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</label>
       </div>
-      <div class="panel-body" ng-repeat="position in positions" ng-hide="loading">
-        <div class="form-group" >
-          <input type="checkbox" ng-model="position.isSelected"> {{position.position}} {{position.employer}}
-          <hr>
-        </div>
-      </div>
-      </div>
     </div>
   </div>
-  <div class="panel-body" ng-repeat="candidat in candidats" ng-hide="loading">
-    <div ng-show="candidat.isSelected">
-  {{candidat}}
-    </div>
-    </div>
-  <div class="panel-body" ng-repeat="position in positions" ng-hide="loading">
-    <div ng-show="position.isSelected">
-      {{position}}
+  <div class="container" style="padding: 10px;">
+    <div class="row">
+      <button class="btn btn-default col-md-12" ng-click="showVisualisation()">Generate Visualization</button>
     </div>
   </div>
-
-  <button>Enter</button>
 </div>
 
 

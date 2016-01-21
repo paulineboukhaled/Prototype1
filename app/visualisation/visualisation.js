@@ -9,10 +9,10 @@ angular.module('myApp.visualisation', ['ngRoute'])
         });
     }])
 
-    .controller('VisualisationCtrl', ['$scope', '$http', function ($scope, $http) {
-        $scope.candidats = {"0": { "lastname":"Bou Khaled", "firstname":"Pauline", "position": "1", "isSelected":"false", "skills":{ "computer":{"Java_(programming_language)":{ "years": "2", "level":"3"},"C_(programming_language)":{ "years": "1", "level":"2"},"PHP":{ "years": "8", "level":"5"}}}},"1": { "lastname":"Marmet", "firstname":"Pauline", "position": "2", "isSelected":"false", "skills":{ "computer":{"Java_(programming_language)":{ "years": "2", "level":"3"},"C_(programming_language)":{ "years": "1", "level":"2"},"PHP":{ "years": "8", "level":"5"}}}},"2": { "lastname":"Ponroy", "firstname":"Blanche", "position": "3", "isSelected":"false", "skills":{ "computer":{"Java_(programming_language)":{ "years": "2", "level":"3"},"C_(programming_language)":{ "years": "1", "level":"2"},"PHP":{ "years": "8", "level":"5"}}}}};
+    .controller('VisualisationCtrl', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
+        $scope.candidats = $rootScope.cand;
         $scope.showItem = false;
-        $scope.jobs = {"0": { "lastname":"Bou Khaled", "firstname":"Pauline", "position": "1", "isSelected":"false", "skills":{ "computer":{"Java_(programming_language)":{ "years": "2", "level":"3"},"C_(programming_language)":{ "years": "1", "level":"2"},"PHP":{ "years": "8", "level":"5"}}}},"1": { "lastname":"Marmet", "firstname":"Pauline", "position": "2", "isSelected":"false", "skills":{ "computer":{"Java_(programming_language)":{ "years": "2", "level":"3"},"C_(programming_language)":{ "years": "1", "level":"2"},"PHP":{ "years": "8", "level":"5"}}}},"2": { "lastname":"Ponroy", "firstname":"Blanche", "position": "3", "isSelected":"false", "skills":{ "computer":{"Java_(programming_language)":{ "years": "2", "level":"3"},"C_(programming_language)":{ "years": "1", "level":"2"},"PHP":{ "years": "8", "level":"5"}}}}};
+        $scope.jobs = $rootScope.job;
         $scope.echelle = ["Year of experience", "Level"];
         $scope.echelleValue = {
             0: {
@@ -75,7 +75,7 @@ angular.module('myApp.visualisation', ['ngRoute'])
 
         };
 
-        $http.get('http://localhost:8080/TM_JobQuest/api/user/list').
+        /*$http.get('http://localhost:8080/TM_JobQuest/api/user/list').
             success(function (data) {
                 $scope.candidats = data;
             });
@@ -83,7 +83,7 @@ angular.module('myApp.visualisation', ['ngRoute'])
         $http.get('http://localhost:8080/TM_JobQuest/api/position/list').
             success(function (data) {
                 $scope.jobs = data;
-            });
+            });*/
 
 
         $scope.init = function() {
