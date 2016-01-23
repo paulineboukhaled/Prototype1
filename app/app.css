@@ -1,4 +1,70 @@
 
+html {
+  overflow-y: scroll;
+
+}
+
+
+
+.left-inner-addon {
+  position: relative;
+}
+.left-inner-addon input {
+  padding-left: 30px;
+}
+.left-inner-addon i {
+  position: absolute;
+  padding: 10px 12px;
+  pointer-events: none;
+}
+
+.right-inner-addon {
+  position: relative;
+}
+.right-inner-addon input {
+  padding-right: 30px;
+}
+.right-inner-addon i {
+  position: absolute;
+  right: 0px;
+  padding: 10px 12px;
+  pointer-events: none;
+}
+
+
+.panel-footer.panel-custom {
+  background: #daedf6;
+}
+
+@media screen and (min-width: 768px) {
+  .modal-dialog {
+    left: 50%;
+    right: auto;
+    width: 624px;
+  }
+}
+
+.modal-footer {
+  padding: 15px;
+  text-align: center;
+  border-top: 1px solid #e5e5e5;
+}
+
+
+.modal-dialog{
+  position: absolute;
+  left: 50%;
+  margin-left: -312px;
+  height: 500px;
+  top: 50%;
+  margin-top: -250px;
+}
+
+.modal-body {
+  position: relative;
+  padding: 15px;
+  height: 70px;
+}
 
 
 .pre-scrollable{
@@ -171,6 +237,7 @@ span.round-tab:hover {
 
 
 /*-------------------------------------------------*/
+/*
 .wizard {
   margin: 20px auto;
   background: #fff;
@@ -312,83 +379,7 @@ span.round-tab:hover {
   }
 }
 
-/*Special fb etc */
-.social {
-  position: relative;
-  height: 3em;
-  width: 16em;
-  margin: 50px 350px;
-}
-
-.social li {
-  display: block;
-  height: 4em;
-  line-height: 4em;
-  margin: -2.2em;
-  position: absolute;
-  -webkit-transition: -webkit-transform .7s;
-  -moz-transition: -moz-transform .7s;
-  -ms-transition: -ms-transform .7s;
-  -o-transition: -o-transform .7s;
-  transition: transform .7s;
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
-  transform: rotate(45deg);
-  text-align: center;
-  width: 4em;
-
-}
-
-.social a {
-  color: #fffdf0;
-  display: block;
-  height: 4em;
-  line-height: 6em;
-  text-align: center;
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-  width: 4em;
-
-}
-
-.social li:hover {
-  -webkit-transform: scale(1.3,1.3) rotate(45deg);
-  -moz-transform: scale(1.3,1.3) rotate(45deg);
-  -ms-transform: scale(1.3,1.3) rotate(45deg);
-  -o-transform: scale(1.3,1.3) rotate(45deg);
-  transform: scale(1.3,1.3) rotate(45deg);
-}
-
-.facebook {
-  background: #155b9d;
-  left: 0;
-  top: 0%;
-}
-
-.twitter {
-  background: #1a9ec4;
-  bottom: 0;
-  left: 25%;
-}
-
-
-.pinterest {
-  background: #e11a30;
-  left: 50%;
-  top: 0%;
-}
-.behance {
-  background: #3f7aa3;
-  bottom: 0;
-  left: 75%;
-}
-
-
+*/
 
 /* app css stylesheet */
 
@@ -430,32 +421,155 @@ span.round-tab:hover {
 }
 
 
-.tabsdemoDynamicTabs md-content {
-  background-color: transparent !important; }
-.tabsdemoDynamicTabs md-content md-tabs {
-  border: 1px solid #e1e1e1; }
-.tabsdemoDynamicTabs md-content md-tabs md-tab-content {
-  background: #f6f6f6; }
-.tabsdemoDynamicTabs md-content md-tabs md-tabs-wrapper {
-  background: white; }
-.tabsdemoDynamicTabs md-content h1:first-child {
-  margin-top: 0; }
-.tabsdemoDynamicTabs md-input-container {
-  padding-bottom: 0; }
-.tabsdemoDynamicTabs .remove-tab {
-  margin-bottom: 40px; }
-.tabsdemoDynamicTabs .demo-tab > div > div {
-  padding: 25px;
-  box-sizing: border-box; }
-.tabsdemoDynamicTabs .edit-form input {
-  width: 100%; }
-.tabsdemoDynamicTabs md-tabs {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12); }
-.tabsdemoDynamicTabs md-tab[disabled] {
-  opacity: 0.5; }
-.tabsdemoDynamicTabs label {
-  text-align: left; }
-.tabsdemoDynamicTabs .long > input {
-  width: 264px; }
-.tabsdemoDynamicTabs .md-button.add-tab {
-  transform: translateY(5px); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+
+body {
+  padding-bottom: 40px;
+  color: #5a5a5a;
+}
+
+
+/* CUSTOMIZE THE NAVBAR
+-------------------------------------------------- */
+
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+.navbar-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 20;
+}
+
+/* Flip around the padding for proper display in narrow viewports */
+.navbar-wrapper > .container {
+  padding-right: 0;
+  padding-left: 0;
+}
+.navbar-wrapper .navbar {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.navbar-wrapper .navbar .container {
+  width: auto;
+}
+
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+/* Carousel base class */
+.carousel {
+  height: 500px;
+  margin-bottom: 60px;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel .item {
+  height: 500px;
+  background-color: #777;
+}
+.carousel-inner > .item > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 500px;
+}
+
+
+/* MARKETING CONTENT
+-------------------------------------------------- */
+
+/* Center align the text within the three columns below the carousel */
+.marketing .col-lg-4 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+.marketing h2 {
+  font-weight: normal;
+}
+.marketing .col-lg-4 p {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+
+/* Featurettes
+------------------------- */
+
+.featurette-divider {
+  margin: 80px 0; /* Space out the Bootstrap <hr> more */
+}
+
+/* Thin out the marketing headings */
+.featurette-heading {
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+@media (min-width: 768px) {
+  /* Navbar positioning foo */
+  .navbar-wrapper {
+    margin-top: 20px;
+  }
+  .navbar-wrapper .container {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  .navbar-wrapper .navbar {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  /* The navbar becomes detached from the top, so we round the corners */
+  .navbar-wrapper .navbar {
+    border-radius: 4px;
+  }
+
+  /* Bump up size of carousel content */
+  .carousel-caption p {
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: 1.4;
+  }
+
+  .featurette-heading {
+    font-size: 50px;
+  }
+}
+
+@media (min-width: 992px) {
+  .featurette-heading {
+    margin-top: 120px;
+  }
+}
+
+body {
+  padding-top: 100px;
+  color: #5a5a5a;
+}

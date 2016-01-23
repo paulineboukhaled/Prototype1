@@ -1,105 +1,337 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-6" >
-      <legend>Candidates</legend>
-      <div class="pre-scrollable" >
-        <div  class="panel panel-default" ng-repeat="candidat in candidats" >
-          <div class="panel-heading">
-            <h2 class="panel-title"  ng-hide="loading" ><input type="checkbox"  ng-model="candidat.isSelected" >
-              <a data-toggle="collapse" data-parent="#accordion" ng-click="showCandidatInfoChange($index)">
-                {{candidat.name}} {{candidat.firstname}}</a>
-            </h2>
-          </div>
-          <div  class="panel-body" ng-show="candidat.show">
-            <fieldset>
-              <label class="col-md-3">Name: </label><div class="col-md-3"> {{candidat.name}} {{candidat.firstname}}</div><label class="col-md-3">Birthdate: </label><div class="col-md-3"> {{candidat.birthdate}}</div>
-            </fieldset>
-            <hr>
-            <fieldset>
-              <label class="col-md-3">Address: </label><div class="col-md-9"> {{candidat.address}}, {{candidat.npa}} {{candidat.city}}</div>
-            </fieldset>
-            <hr>
-            <fieldset>
-              <label class="col-md-3">Skills: </label>
-              <div class="col-md-9">
-                <div ng-repeat="skill in candidat.skills">
-                  <div >{{skill.name}} </div>
-                </div>
-              </div>
-            </fieldset>
-            <hr>
-            <fieldset>
-              <label class="col-md-3">Titles: </label>
-              <div class="col-md-9">
-                <div ng-repeat="school in candidat.schools">
-                  <div >{{school.title}} </div>
-                </div>
-              </div>
-            </fieldset>
-          </div>
-          <div class="row panel-footer clearfix" ng-show="candidat.show">
-            <button class="btn btn-success pull-left" style="margin-left: 3px;" ng-click="getBestPositions(candidat.uri)"><i class="fa fa-briefcase"></i></button>
-            <button class="btn btn-danger btn-circle pull-right" style="margin: 3px;"> <i class="fa fa-trash-o"></i></button>
-            <button class="btn btn-warning btn-circle pull-right"  style="margin: 3px;"><i class="fa fa-pencil-square-o"></i></button>
-          </div>
-        </div>
-        <div ng-show="loading">
-          <label ><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</label>
-        </div>
-      </div>
+<div class="row">
+  <img src="logoJQ.png"  class="col-md-2" />
+  <div class="col-md-7"></div>
+  <div class="col-md-3">
+  <button class="btn btn-default pull-right"  ng-click="showVisualisation()">Generate Visualization</button>
+    </div>
+</div>
+
+<div class="row"  ng-hide="showmatchingCand || showmatchingPos">
+  <div class="col-md-6" >
+    <legend>Candidates</legend>
+    <div class="left-inner-addon " style="margin-top: 10px; margin-bottom: 10px">
+      <i class="fa fa-user fa-1x"></i>
+      <input type="text"
+             class="form-control"
+             placeholder="Username" ng-model="candSearch"/>
     </div>
 
-
-    <div class="col-md-6">
-      <legend>Jobs</legend>
-      <div class="pre-scrollable">
-        <div class="panel panel-default" ng-repeat="position in positions" >
-          <div class="panel-heading">
-            <h2 class="panel-title"  ng-hide="loading" >
-              <input type="checkbox"  ng-model="position.isSelected" >
-              <a data-toggle="collapse" data-parent="#accordion" ng-click="showPositionInfoChange($index)">
-                {{position.position}} {{position.employer}}</a>
-            </h2>
-          </div>
-          <div  class="panel-body" ng-show="position.show">
-            <fieldset>
-              <label class="col-md-3">Job: </label><div class="col-md-3"> {{position.position}} </div><label class="col-md-3">Employer: </label><div class="col-md-3"> {{position.employer}}</div>
-            </fieldset>
-            <hr>
-            <fieldset>
-              <label class="col-md-1">Start: </label><div class="col-md-1">{{position.start}}</div><label class="col-md-1">End: </label><div class="col-md-1">{{position.end}}</div><label class="col-md-4">Location: </label><div class="col-md-4">{{position.npa}} {{position.city}}</div>
-            </fieldset>
-            <hr>
-            <fieldset>
-              <label class="col-md-3">Skills: </label>
-              <div class="col-md-9">
-                <div ng-repeat="skill in position.skills">
-                  <div >{{skill.name}} </div>
+    <div class="pre-scrollable" >
+      <div ng-class="candidat.isSelected ? 'panel panel-info':'panel panel-default'" ng-repeat="candidat in candidats | filter:candSearch" >
+        <div class="panel-heading">
+          <h2 class="panel-title"  ng-hide="loadingCand" ><input type="checkbox"  ng-model="candidat.isSelected" >
+            <a data-toggle="collapse" data-parent="#accordion" ng-click="showCandidatInfoChange($index)">
+              {{candidat.name}} {{candidat.firstname}}</a>
+          </h2>
+        </div>
+        <div  class="panel-body" ng-show="candidat.show">
+          <fieldset>
+            <label class="col-md-3">Name: </label><div class="col-md-3"> {{candidat.name}} {{candidat.firstname}}</div><label class="col-md-3">Birthdate: </label><div class="col-md-3"> {{candidat.birthdate}}</div>
+          </fieldset>
+          <hr>
+          <fieldset>
+            <label class="col-md-3">Address: </label><div class="col-md-9"> {{candidat.address}}, {{candidat.npa}} {{candidat.city}}</div>
+          </fieldset>
+          <hr>
+          <fieldset>
+            <label class="col-md-3">Skills: </label>
+            <div class="col-md-9">
+              <div ng-repeat="skill in candidat.skills">
+                <div >{{skill.name}} </div>
+              </div>
+            </div>
+          </fieldset>
+          <hr>
+          <fieldset>
+            <label class="col-md-3">Titles: </label>
+            <div class="col-md-9">
+              <div ng-repeat="school in candidat.schools">
+                <div >{{school.title}} </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <div  ng-class="candidat.isSelected ? 'panel-footer panel-custom clearfix':'panel-footer clearfix'"  ng-show="candidat.show">
+          <button type="button" class="btn btn-success pull-left" style="margin-left: 3px;" data-toggle="modal" data-target="#myModalCand{{candidat.index}}"><i class="fa fa-briefcase"></i></button>
+          <button type="button" class="btn btn-danger btn-circle pull-right" style="margin: 3px;"> <i class="fa fa-trash-o"></i></button>
+          <button type="button" class="btn btn-warning btn-circle pull-right"  style="margin: 3px;"><i class="fa fa-pencil-square-o"></i></button>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="myModalCand{{candidat.index}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+              </div>
+              <div class="modal-body">
+                <div class="col-md-8"> Choose how many positions you want: </div>
+                <div class="col-md-4">
+                  <div class="input-group">
+                      <span class="input-group-btn">
+                          <button type="button" class="btn btn-danger" ng-click="lowNbResults()" >
+                            <span class="glyphicon glyphicon-minus"></span>
+                          </button>
+                      </span>
+                    <input type="text"  class="form-control"  ng-model="nbresults"  min="1" max="100">
+                      <span class="input-group-btn">
+                          <button type="button" class="btn btn-success" ng-click="upperNbResults()"  >
+                            <span class="glyphicon glyphicon-plus"></span>
+                          </button>
+                        </span>
+                  </div>
                 </div>
               </div>
-            </fieldset>
-            <hr>
-            <fieldset>
-              <label class="col-md-3">Titles: </label>
-              <div class="col-md-9">
-                <div ng-repeat="school in position.schools">
-                  <div >{{school.title}} </div>
-                </div>
+              <div class="modal-footer">
+                <button type="button" class="center btn btn-default" data-dismiss="modal"  ng-click="getBestPositions(candidat.uri, nbresults); showmatch(candidat)">Analyse</button>
+                <button type="button" class="center btn btn-primary" data-dismiss="modal">Cancel</button>
               </div>
-            </fieldset>
+            </div>
           </div>
         </div>
       </div>
-      <div ng-show="loading">
+      <div ng-show="loadingCand">
         <label ><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</label>
       </div>
     </div>
   </div>
-  <div class="container" style="padding: 10px;">
-    <div class="row">
-      <button class="btn btn-default col-md-12" ng-click="showVisualisation()">Generate Visualization</button>
+  <div class="col-md-6">
+    <legend>Jobs</legend>
+    <div class="left-inner-addon " style="margin-top: 10px; margin-bottom: 10px">
+      <i class="fa fa-briefcase fa-1x"></i>
+      <input type="text"
+             class="form-control"
+             placeholder="Username" ng-model="jobSearch"/>
+    </div>
+    <div ng-show="loadingPos">
+      <label ><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</label>
+    </div>
+    <div class="pre-scrollable">
+      <div ng-class="position.isSelected ? 'panel panel-info':'panel panel-default'" ng-repeat="position in positions | filter:jobSearch" >
+        <div class="panel-heading">
+          <h2 class="panel-title"  ng-hide="loadingPos" >
+            <input type="checkbox"  ng-model="position.isSelected" >
+            <a data-toggle="collapse" data-parent="#accordion" ng-click="showPositionInfoChange(position.index)">
+              {{position.position}} {{position.employer}}</a>
+          </h2>
+        </div>
+        <div  class="panel-body" ng-show="position.show">
+          <fieldset>
+            <label class="col-md-3">Job: </label><div class="col-md-3"> {{position.position}} </div><label class="col-md-3">Employer: </label><div class="col-md-3"> {{position.employer}}</div>
+          </fieldset>
+          <hr>
+          <fieldset>
+            <label class="col-md-1">Start: </label><div class="col-md-1">{{position.start}}</div><label class="col-md-1">End: </label><div class="col-md-1">{{position.end}}</div><label class="col-md-4">Location: </label><div class="col-md-4">{{position.npa}} {{position.city}}</div>
+          </fieldset>
+          <hr>
+          <fieldset>
+            <label class="col-md-3">Skills: </label>
+            <div class="col-md-9">
+              <div ng-repeat="skill in position.skills">
+                <div >{{skill.name}} </div>
+              </div>
+            </div>
+          </fieldset>
+          <hr>
+          <fieldset>
+            <label class="col-md-3">Titles: </label>
+            <div class="col-md-9">
+              <div ng-repeat="school in position.schools">
+                <div >{{school.title}} </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <div ng-class="position.isSelected ? 'panel-footer panel-custom clearfix':'panel-footer clearfix'" ng-show="position.show">
+          <button type="button" class="btn btn-success pull-left" style="margin-left: 3px;" data-toggle="modal" data-target="#myModalPos{{position.index}}" ><i class="fa fa-user"></i></button>
+          <button type="button" class="btn btn-danger btn-circle pull-right" style="margin: 3px;"> <i class="fa fa-trash-o"></i></button>
+          <button type="button" class="btn btn-warning btn-circle pull-right"  style="margin: 3px;"><i class="fa fa-pencil-square-o"></i></button>
+        </div>
+        <div class="modal fade" id="myModalPos{{position.index}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel2">{{position.position}}</h4>
+              </div>
+              <div class="modal-body">
+                <div class="col-md-8"> Choose how many candidates you want: </div>
+                <div class="col-md-4">
+                  <div class="input-group">
+                      <span class="input-group-btn">
+                          <button type="button" class="btn btn-danger" ng-click="lowNbResults()" >
+                            <span class="glyphicon glyphicon-minus"></span>
+                          </button>
+                      </span>
+                    <input type="text"  class="form-control"  ng-model="nbresults"  min="1" max="100">
+                      <span class="input-group-btn">
+                          <button type="button" class="btn btn-success" ng-click="upperNbResults()"  >
+                            <span class="glyphicon glyphicon-plus"></span>
+                          </button>
+                        </span>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="center btn btn-default" data-dismiss="modal"  ng-click="getBestCandidates(position.uri, nbresults); showmatchPos(position)">Analyse</button>
+                <button type="button" class="center btn btn-primary" data-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+</div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div ng-show="showmatchingCand">
+  <legend>Analyze done for {{candidatSelected.name}} {{candidatSelected.firstname}}</legend>
+  <div  class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title"  >
+          {{candidatSelected.name}} {{candidatSelected.firstname}}
+      </h2>
+    </div>
+    <div  class="panel-body">
+      <fieldset>
+        <label class="col-md-3">Name: </label><div class="col-md-3"> {{candidatSelected.name}} {{candidatSelected.firstname}}</div><label class="col-md-3">Birthdate: </label><div class="col-md-3"> {{candidatSelected.birthdate}}</div>
+      </fieldset>
+      <hr>
+      <fieldset>
+        <label class="col-md-3">Address: </label><div class="col-md-9"> {{candidatSelected.address}}, {{candidatSelected.npa}} {{candidatSelected.city}}</div>
+      </fieldset>
+      <hr>
+      <fieldset>
+        <label class="col-md-3">Skills: </label>
+        <div class="col-md-9">
+          <div ng-repeat="skill in candidatSelected.skills">
+            <div >{{skill.name}} </div>
+          </div>
+        </div>
+      </fieldset>
+      <hr>
+      <fieldset>
+        <label class="col-md-3">Titles: </label>
+        <div class="col-md-9">
+          <div ng-repeat="school in candidatSelected.schools">
+            <div >{{school.title}} </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div  class="panel panel-default" ng-repeat="pos in bestPositions | orderBy:'-similarity'" >
+    <div class="panel-heading">
+      <h2 class="panel-title" >
+        <input type="checkbox"  ng-model="position.isSelected" >
+          {{getPosition(pos.positionId).position}} {{getPosition(pos.positionId).employer}}
+      </h2>
+    </div>
+    <div class="panel-body">
+      <fieldset>
+        <label class="col-md-2">Name: </label><div class="col-md-8"> {{getPosition(pos.positionId).position}} {{getPosition(pos.positionId).employer}}</div> <label class="col-md-2"><font color="green"> {{pos.similarity}}</font></label>
+      </fieldset>
+      <hr>
+      <fieldset>
+        <label class="col-md-1">Start: </label><div class="col-md-1">{{getPosition(pos.positionId).start}}</div><label class="col-md-1">End: </label><div class="col-md-1">{{getPosition(pos.positionId).end}}</div><label class="col-md-2">Address: </label><div class="col-md-6">{{getPosition(pos.positionId).npa}} {{getPosition(pos.positionId).city}}</div>
+      </fieldset>
+      <hr>
+      <fieldset>
+        <label class="col-md-2">Skills: </label>
+        <div class="col-md-4">
+          <div ng-repeat="skill in getPosition(pos.positionId).skills">
+            <div >{{skill.name}} </div>
+          </div>
+        </div>
+        <label class="col-md-2">Titles: </label>
+        <div class="col-md-4">
+          <div ng-repeat="school in getPosition(pos.positionId).schools">
+            <div >{{school.title}} </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+</div>
+<div ng-show="showmatchingPos">
+  <legend>Analyze done for {{positionSelected.position}} {{positionSelected.employer}}</legend>
+  <div  class="panel panel-info">
+    <div class="panel-heading">
+      <h2 class="panel-title" >
+          {{positionSelected.position}} {{positionSelected.employer}}
+      </h2>
+    </div>
+    <div  class="panel-body">
+      <fieldset>
+        <label class="col-md-2">Name: </label><div class="col-md-10"> {{positionSelected.position}} {{positionSelected.employer}}</div>
+      </fieldset>
+      <hr>
+      <fieldset>
+        <label class="col-md-1">Start: </label><div class="col-md-1">{{positionSelected.start}}</div><label class="col-md-1">End: </label><div class="col-md-1">{{positionSelected.end}}</div><label class="col-md-2">Address: </label><div class="col-md-6">{{positionSelected.npa}} {{positionSelected.city}}</div>
+      </fieldset>
+      <hr>
+      <fieldset>
+        <label class="col-md-2">Skills: </label>
+        <div class="col-md-4">
+          <div ng-repeat="skill in positionSelected.skills">
+            <div >{{skill.name}} </div>
+          </div>
+        </div>
+        <label class="col-md-2">Titles: </label>
+        <div class="col-md-4">
+          <div ng-repeat="school in positionSelected.schools">
+            <div >{{school.title}} </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div  class="panel panel-default" ng-repeat="cad in bestCandidates  | orderBy:'-similarity'" >
+    <div class="panel-heading">
+      <h2 class="panel-title">
+        <input type="checkbox"  ng-model="position.isSelected" >
+          {{getCandidat(cad.personId).name}} {{getCandidat(cad.personId).firstname}}
+      </h2>
+    </div>
+    <div class="panel-body">
+      <fieldset>
+        <label class="col-md-2">Name: </label><div class="col-md-3">{{getCandidat(cad.personId).name}} {{getCandidat(cad.personId).firstname}}</div><label class="col-md-2">Birthdate: </label><div class="col-md-3"> {{getCandidat(cad.personId).birthdate}}</div>   <label class="col-md-2"><font color="green"> {{cad.similarity}}</font></label>
+
+      </fieldset>
+      <hr>
+      <fieldset>
+        <label class="col-md-3">Address: </label><div class="col-md-9"> {{getCandidat(cad.personId).address}},{{getCandidat(cad.personId).npa}} {{getCandidat(cad.personId).city}}</div>
+      </fieldset>
+      <hr>
+      <fieldset>
+        <label class="col-md-3">Skills: </label>
+        <div class="col-md-3">
+          <div ng-repeat="skill in getCandidat(cad.personId).skills">
+            <div >{{skill.name}} </div>
+          </div>
+        </div>
+        <label class="col-md-3">Titles: </label>
+        <div class="col-md-3">
+          <div ng-repeat="school in getCandidat(cad.personId).schools">
+            <div >{{school.title}} </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+</div>
