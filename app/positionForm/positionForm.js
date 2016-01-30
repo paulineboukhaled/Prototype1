@@ -1,28 +1,27 @@
 'use strict';
 
-angular.module('myApp.view2', ['ngRoute'])
+angular.module('myApp.positionForm', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/view2', {
-    templateUrl: 'view2/view2.html',
-    controller: 'View2Ctrl'
+  $routeProvider.when('/positionForm', {
+    templateUrl: 'positionForm/positionForm.html',
+    controller: 'PositionCtrl'
   });
 }])
 
-.controller('View2Ctrl', ['$scope', '$http', '$route', function ($scope, $http, $route) {
-
-
-      $scope.levelTypes = [{id: '1', name: 'Knowledge'}, {id: '2', name: 'Experience'}, {
-        id: '3',
-        name: 'Deep'
-      }, {id: '4', name: 'Expert'}];
-      $scope.yearOfExperienceTypes = [{id: '1', name: '1-2'}, {id: '2', name: '3-5'}, {
-        id: '3',
-        name: '6-10'
-      }, {id: '4', name: '10+'}];
+.controller('PositionCtrl', ['$scope', '$http', '$route', function ($scope, $http, $route) {
+      $scope.state = 0;
+      $scope.levelTypes = [
+          {id: '1', name: 'Knowledge'},
+          {id: '2', name: 'Experience'},
+          {id: '3', name: 'Deep'},
+          {id: '4', name: 'Expert'}];
+      $scope.yearOfExperienceTypes = [
+          {id: '1', name: '1-2'},
+          {id: '2', name: '3-5'},
+          {id: '3', name: '6-10'},
+          {id: '4', name: '10+'}];
       $scope.tabSelected = "#step1";
-
-
 
       $scope.newPosition = {
         "position": "Programmer Junior Java/PHP",
@@ -60,14 +59,6 @@ angular.module('myApp.view2', ['ngRoute'])
           "city": "Lausanne"
         }]
       };
-
-
-      $scope.count = 0;
-
-
-
-
-
 
 
       $scope.getLabels = function (label) {
@@ -112,8 +103,10 @@ angular.module('myApp.view2', ['ngRoute'])
 
 
       $scope.sendInformation = function () {
+          $scope.state = 1;
         $http.post('http://localhost:8080/TM_JobQuest/api/position/getForm', $scope.newPosition).success(function (data, status) {
           console.log(data);
+            $scope.state = 2;
         })
       };
 

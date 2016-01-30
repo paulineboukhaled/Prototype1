@@ -1,128 +1,88 @@
 <!DOCTYPE html>
-  <!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-  <!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-  <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-  <!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>My AngularJS App</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
-    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-    <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>My AngularJS App</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+  <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel='stylesheet' type='text/css'>
+  <link href="bower_components/bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="bower_components/bootstrap-select/dist/css/bootstrap-select.min.css">
+  <link href="bower_components/angucomplete/angucomplete.css" rel="stylesheet">
 
-  </head>
+  <link rel="stylesheet" href="app.css">
 
-  <body>
 
-  <div class="navbar-wrapper">
-    <div class="container">
+</head>
 
-      <nav class="navbar navbar-inverse navbar-static-top">
-        <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#/">JobQuest</a>
-          </div>
-          <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li><a href="#/view1">Curriculum Vitae</a></li>
-              <li><a href="#/view2">Position</a></li>
-              <li><a href="#/view3">Matching</a></li>
-              <li><a href="#/viz">Viz</a></li>
-              <li><a href="#/visualisation">Visualisation</a></li>
-            </ul>
-          </div>
+<body>
+
+<div class="navbar-wrapper">
+  <div class="container">
+
+    <nav class="navbar navbar-inverse navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#/">JobQuest</a>
         </div>
-      </nav>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#/cvForm">Curriculum Vitae</a></li>
+            <li><a href="#/positionForm">Position</a></li>
+            <li><a href="#/matching">Matching</a></li>
+            <li><a href="#/visualisation">Visualisation</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-    </div>
   </div>
+</div>
 
 
-  <div class="container marketing">
-    <div ng-view></div>
-  </div>
+<div class="container marketing">
+  <div ng-view></div>
+</div>
 
-    <!-- In production use:
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-    -->
-    <!--script src="app/bower_components/bootstrap/dist/css/bootstrap.css"></script>
-    <!--script src="app/bower_components/bootstrap/dist/css/bootstrap.min.css">--script--->
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <!--script src="bower_components/bootstrap-tags/dist/js/bootstrap-tags.js"></script-->
-    <script src="bower_components/bootstrap-tags/dist/js/bootstrap-tags.min.js"></script>
-    <!--link rel="stylesheet" type="text/css" href="bower_components/bootstrap-tags/dist/css/bootstrap-tags.css" /-->
-    <!--script src="bower_components/angular-file-upload/dist/angular-file-upload.js"></script-->
-    <script src="bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-    <link href="bower_components/bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
-    <!-- canvas-to-blob.min.js is only needed if you wish to resize images before upload.
-         This must be loaded before fileinput.min.js -->
-    <script src="bower_components/bootstrap-fileinput/js/plugins/canvas-to-blob.min.js" type="text/javascript"></script>
-    <script src="bower_components/bootstrap-fileinput/js/fileinput.min.js"></script>
-    <!-- bootstrap.js below is only needed if you wish to the feature of viewing details
-         of text file preview via modal dialog -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="bower_components/bootstrap-fileinput/js/fileinput_locale_fr.js"></script>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="bower_components/bootstrap-select/dist/css/bootstrap-select.min.css">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="bower_components/bootstrap-select/js/bootstrap-select.js"></script>
-
-    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
-    <script src="bower_components/bootstrap-select/dist/js/i18n/defaults-en_US.min.js"></script>
-    <script src='bower_components/angular-upload/angular-upload.min.js'></script>
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Shadows+Into+Light' rel='stylesheet' type='text/css'>
-    <script src="bower_components/angucomplete/angucomplete.js"></script>
-    <link href="bower_components/angucomplete/angucomplete.css" rel="stylesheet">
-
-    <script src="http://code.highcharts.com/highcharts.js"></script>
-    <script src="http://code.highcharts.com/highcharts-more.js"></script>
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-    <link rel="stylesheet" href="app.css">
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
+<script src="bower_components/bootstrap-tags/dist/js/bootstrap-tags.min.js"></script>
+<script src="bower_components/bootstrap-fileinput/js/plugins/canvas-to-blob.min.js" type="text/javascript"></script>
+<script src="bower_components/bootstrap-fileinput/js/fileinput.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="bower_components/bootstrap-fileinput/js/fileinput_locale_fr.js"></script>
+<script src="bower_components/bootstrap-select/js/bootstrap-select.js"></script>
+<script src="bower_components/bootstrap-select/dist/js/i18n/defaults-en_US.min.js"></script>
+<script src='bower_components/angular-upload/angular-upload.min.js'></script>
+<script src="bower_components/angucomplete/angucomplete.js"></script>
+<script src="bower_components/highcharts/highcharts.js"></script>
 
 
 
+<script src="app.js"></script>
+<script src="home/home.js"></script>
+<script src="cvForm/cvForm.js"></script>
+<script src="positionForm/positionForm.js"></script>
+<script src="matching/matching.js"></script>
+<script src="visualisation/visualisation.js"></script>
 
 
-
-
-
-    <!-- Fix for old browsers -->
-
-    <script src="app.js"></script>
-    <script src="view1/view1.js"></script>
-    <script src="view2/view2.js"></script>
-  <script src="view3/view3.js"></script>
-  <script src="viz/view1.js"></script>
-    <script src="visualisation/visualisation.js"></script>
-
-
-    <script src="components/version/version.js"></script>
-    <script src="components/version/version-directive.js"></script>
-    <script src="components/version/interpolate-filter.js"></script>
-  </body>
+<script src="components/version/version.js"></script>
+<script src="components/version/version-directive.js"></script>
+<script src="components/version/interpolate-filter.js"></script>
+</body>
 </html>

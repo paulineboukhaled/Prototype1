@@ -1,29 +1,26 @@
 'use strict';
 
-angular.module('myApp.view3', ['ngRoute'])
+angular.module('myApp.matching', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/view3', {
-    templateUrl: 'view3/view3.html',
-    controller: 'View3Ctrl'
+  $routeProvider.when('/matching', {
+    templateUrl: 'matching/matching.html',
+    controller: 'MatchingCtrl'
   });
 }])
 
-.controller('View3Ctrl', ['$scope', '$http', '$route', '$rootScope', '$location', function ($scope, $http, $route, $rootScope, $location) {
-
+.controller('MatchingCtrl', ['$scope', '$http', '$route', '$rootScope', '$location', function ($scope, $http, $route, $rootScope, $location) {
         $scope.candidats = [];
         $scope.positions = [];
         $scope.bestPositions = [];
         $scope.bestCandidates = [];
         $scope.loadingCand = true;
         $scope.loadingPos = true;
-
-        $scope.nbresults = 10;
+        $scope.nbresults = 5;
         $scope.candidatSelected = [];
         $scope.positionSelected = [];
         $scope.showmatchingCand = false;
         $scope.showmatchingPos = false;
-
 
 
         $scope.showmatch = function(cand){
@@ -38,7 +35,6 @@ angular.module('myApp.view3', ['ngRoute'])
             console.log(pos);
             $scope.showmatchingPos = !$scope.showmatchingPos;
         };
-
 
         $scope.lowNbResults = function (){
             if($scope.nbresults==0){
@@ -148,9 +144,7 @@ angular.module('myApp.view3', ['ngRoute'])
             var id = 0;
             for(var candId in $scope.candidats){
                 if($scope.candidats[candId].isSelected){
-                    console.log($scope.candidats[candId]);
-
-
+                    //console.log($scope.candidats[candId]);
                     var skills = {};
                     skills["computer"] = {};
 
@@ -159,9 +153,7 @@ angular.module('myApp.view3', ['ngRoute'])
                             "years":parseInt($scope.candidats[candId].skills[skillId].yearOfExperience),
                             "level":parseInt($scope.candidats[candId].skills[skillId].level)
                         };
-
                     }
-
                     $scope.candidatsPA[id] = {
                         "lastname": $scope.candidats[candId].name,
                         "firstname":$scope.candidats[candId].firstname,
@@ -169,59 +161,10 @@ angular.module('myApp.view3', ['ngRoute'])
                         "isSelected":"false",
                         "skills": skills
                     };
-
                     id++;
-
                 }
             }
 
-/*
-            {
-                "0":{
-                "name":"DevCpp",
-                    "position":"1",
-                    "isSelected":"false",
-                    "skills":{
-                    "computer":{
-                        "Java_(programming_language)":{
-                            "years":2,
-                                "level":4
-                        },
-                        "skill2":{
-                            "years":3,
-                                "level":3
-                        },
-                        "skill3":{
-                            "years":1,
-                                "level":1
-                        }
-                    }
-                }
-            },*/
-/*
-            {
-                "0":{
-                "position":1,
-                    "isSelected":"false",
-                    "skills":{
-                    "computer":{
-                        "Java_(programming_language)":{
-                            "years":"2",
-                                "level":"4"
-                        },
-                        "skill2":{
-                            "years":"3",
-                                "level":"3"
-                        },
-                        "skill3":{
-                            "years":"1",
-                                "level":"1"
-                        }
-                    }
-                }
-            }
-            }
-*/
             id = 0;
             for(var jobId in $scope.positions){
                 if($scope.positions[jobId].isSelected){
@@ -253,57 +196,8 @@ angular.module('myApp.view3', ['ngRoute'])
 
             $rootScope.cand = $scope.candidatsPA;
             $rootScope.job = $scope.jobsPA;
-
             $location.url('/visualisation');
 
         };
-
-
-
-      /*getListCandidat();
-      function getListCandidat() {
-        $http.get("http://localhost:8080/TM_JobQuest/api/listPerson")
-            .then(function successCallback(response) {
-              console.log(response);
-              $scope.candidats = response.data;
-
-              // this callback will be called asynchronously
-              // when the response is available
-            }, function errorCallback(response) {
-              $scope.candidats = [
-                {nom: 'dupont', prenom: 'pierre'},
-                {nom: 'dupont', prenom: 'paul'},
-                {nom: 'dupont', prenom: 'jacques'},
-                {nom: 'dupont', prenom: 'alice'}
-              ];
-              // called asynchronously if an error occurs
-              // or server returns response with an error status.
-            });
-      }
-      $scope.deleteCandidat = function (candidat) {
-        $http.post("http://localhost:8080/TM_JobQuest/api/delete", candidat).then(function successCallback(response) {
-          console.log(response);
-          // this callback will be called asynchronously
-          // when the response is available
-        }, function errorCallback(response) {
-          console.log(response);
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
-        });
-
-      }
-      $scope.addCandidat = function (candidat) {
-        $http.post("http://localhost:8080/TM_JobQuest/api/post", candidat).then(function successCallback(response) {
-          console.log(response);
-          // this callback will be called asynchronously
-          // when the response is available
-        }, function errorCallback(response) {
-          console.log(response);
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
-        });
-      }*/
-
-
 
 }]);

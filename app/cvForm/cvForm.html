@@ -1,6 +1,7 @@
 <div class="row">
     <img src="logoJQ.png"  class="col-md-2" />
-    <div class="col-md-10">
+
+    <div class="col-md-10" ng-show="state == 0">
         <div class="wizard">
             <div class="wizard-inner">
                 <div class="connecting-line"></div>
@@ -319,5 +320,28 @@
             </div>
         </div>
     </div>
+    <div class="col-md-10" ng-show="state == 1">
+        <label ><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Uploading...</label>
+    </div>
+    <div class="col-md-10" ng-show="state == 2">
+        <div class="alert alert-success" role="alert">
+            Your candidate has been uploaded.
+        </div>
+        <center>
+            <button type="button" class="btn btn-primary" style="margin: 5px; width: 150px;" ng-click="state=0; init();" ><i class="fa fa-user-plus"></i></button>
+            <a type="button" class="btn btn-primary"  style="margin: 5px; width: 150px;" href="#/positionForm" ><i class="fa fa-briefcase"></i></a>
+            <a type="button" class="btn btn-primary" style="margin: 5px; width: 150px;" href="#/matching" ><i class="fa fa-bar-chart"></i></a>
+        </center>
+    </div>
 
+
+</div>
+
+<div class="pull-right" ng-show="state == 0">
+    <button class="btn btn-primary" ng-click="sendInformation(newCandidat)" >
+        <span class="glyphicon glyphicon-ok-sign"></span> Save the informations
+    </button>
+    <button class="btn btn-primary" type="reset">
+        <span class="glyphicon glyphicon-remove-sign"></span > Cancel
+    </button>
 </div>
